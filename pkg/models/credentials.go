@@ -8,7 +8,7 @@ import (
 type Settings struct {
 	PublicKey  string `json:"atlasPublicKey"`
 	PrivateKey string `json:"atlasPrivateKey"`
-	ApiType string `json:"apiType"`
+	ApiType    string `json:"apiType"`
 }
 
 func LoadSettings(settings backend.DataSourceInstanceSettings) (*Settings, error) {

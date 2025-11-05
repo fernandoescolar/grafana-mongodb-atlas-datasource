@@ -2,19 +2,17 @@ package datasource
 
 import (
 	"context"
-	"time"
 	"strings"
+	"time"
 
 	simplejson "github.com/bitly/go-simplejson"
 
-	"github.com/valiton/grafana-mongodb-atlas-datasource/pkg/dfutil"
-	"github.com/valiton/grafana-mongodb-atlas-datasource/pkg/models"
-	"github.com/grafana/grafana-plugin-sdk-go/backend/log"
+	"github.com/fernandoescolar/grafana-mongodb-atlas-datasource/pkg/dfutil"
+	"github.com/fernandoescolar/grafana-mongodb-atlas-datasource/pkg/models"
 	"github.com/grafana/grafana-plugin-sdk-go/backend"
+	"github.com/grafana/grafana-plugin-sdk-go/backend/log"
 	"github.com/grafana/grafana-plugin-sdk-go/data"
 )
-
-
 
 type Datasource struct {
 	client *MongoDBAtlasClient
@@ -47,7 +45,7 @@ type DataPoint struct {
 }
 
 type DataFrame struct {
-	Name string
+	Name   string
 	Points []DataPoint
 }
 
@@ -68,7 +66,6 @@ func (df DataFrame) Frames() data.Frames {
 
 	return data.Frames{frame}
 }
-
 
 func GetMeasurementOptions(options *MeasurementOptions) map[string]string {
 	var granularity string
@@ -98,7 +95,7 @@ func GetMeasurements(name string, body []byte, ctx context.Context) (*DataFrame,
 	}
 
 	df := &DataFrame{
-		Name: name,
+		Name:   name,
 		Points: make([]DataPoint, 0),
 	}
 
@@ -132,7 +129,7 @@ func GetMeasurements(name string, body []byte, ctx context.Context) (*DataFrame,
 		dataPoints = append(dataPoints, dataPoint)
 	}
 
-	df.Points = dataPoints;
+	df.Points = dataPoints
 
 	log.DefaultLogger.Debug("GetMeasurements", "Final data points", dataPoints)
 
@@ -159,12 +156,12 @@ func (d *Datasource) HandleProcessMeasurementsQuery(ctx context.Context, query *
 	project := query.Project.Value
 	mongo := query.Mongo.Value
 	options := &MeasurementOptions{
-		Start: unixToRFC3339(req.TimeRange.From.Unix()),
-		End: unixToRFC3339(req.TimeRange.To.Unix()),
-		IntervalMs: formatInterval(req.Interval),
+		Start:       unixToRFC3339(req.TimeRange.From.Unix()),
+		End:         unixToRFC3339(req.TimeRange.To.Unix()),
+		IntervalMs:  formatInterval(req.Interval),
 		Measurement: query.Dimension.Value,
 	}
-	
+
 	name := getName(query.RefId, query.Alias, query.Project.Value, query.Project.Label, query.Cluster.Value, query.Cluster.Label, "", mongo, "", query.Dimension.Value)
 
 	body, err := d.client.query(ctx, "/groups/"+project+"/processes/"+mongo+"/measurements", GetMeasurementOptions(options))
@@ -179,9 +176,9 @@ func (d *Datasource) HandleDatabaseMeasurementsQuery(ctx context.Context, query 
 	mongo := query.Mongo.Value
 	database := query.Database.Value
 	options := &MeasurementOptions{
-		Start: unixToRFC3339(req.TimeRange.From.Unix()),
-		End: unixToRFC3339(req.TimeRange.To.Unix()),
-		IntervalMs: formatInterval(req.Interval),
+		Start:       unixToRFC3339(req.TimeRange.From.Unix()),
+		End:         unixToRFC3339(req.TimeRange.To.Unix()),
+		IntervalMs:  formatInterval(req.Interval),
 		Measurement: query.Dimension.Value,
 	}
 
@@ -199,9 +196,9 @@ func (d *Datasource) HandleDiskMeasurementsQuery(ctx context.Context, query *mod
 	mongo := query.Mongo.Value
 	disk := query.Disk.Value
 	options := &MeasurementOptions{
-		Start: unixToRFC3339(req.TimeRange.From.Unix()),
-		End: unixToRFC3339(req.TimeRange.To.Unix()),
-		IntervalMs: formatInterval(req.Interval),
+		Start:       unixToRFC3339(req.TimeRange.From.Unix()),
+		End:         unixToRFC3339(req.TimeRange.To.Unix()),
+		IntervalMs:  formatInterval(req.Interval),
 		Measurement: query.Dimension.Value,
 	}
 

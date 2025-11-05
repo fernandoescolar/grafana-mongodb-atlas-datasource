@@ -3,8 +3,8 @@ package plugin
 import (
 	"context"
 
-	"github.com/valiton/grafana-mongodb-atlas-datasource/pkg/dfutil"
-	"github.com/valiton/grafana-mongodb-atlas-datasource/pkg/models"
+	"github.com/fernandoescolar/grafana-mongodb-atlas-datasource/pkg/dfutil"
+	"github.com/fernandoescolar/grafana-mongodb-atlas-datasource/pkg/models"
 	"github.com/grafana/grafana-plugin-sdk-go/backend"
 )
 
@@ -31,7 +31,7 @@ func CheckHealth(ctx context.Context, d Datasource, req *backend.CheckHealthRequ
 		}, nil
 	}
 	return &backend.CheckHealthResult{
-		Status: backend.HealthStatusOk,
+		Status:  backend.HealthStatusOk,
 		Message: backend.HealthStatusOk.String(),
 	}, nil
 }

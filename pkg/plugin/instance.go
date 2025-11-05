@@ -3,11 +3,11 @@ package plugin
 import (
 	"context"
 
+	"github.com/fernandoescolar/grafana-mongodb-atlas-datasource/pkg/datasource"
+	"github.com/fernandoescolar/grafana-mongodb-atlas-datasource/pkg/dfutil"
+	"github.com/fernandoescolar/grafana-mongodb-atlas-datasource/pkg/models"
 	"github.com/grafana/grafana-plugin-sdk-go/backend"
 	"github.com/grafana/grafana-plugin-sdk-go/backend/instancemgmt"
-	"github.com/valiton/grafana-mongodb-atlas-datasource/pkg/datasource"
-	"github.com/valiton/grafana-mongodb-atlas-datasource/pkg/dfutil"
-	"github.com/valiton/grafana-mongodb-atlas-datasource/pkg/models"
 )
 
 // Instance is the root Datasource implementation that wraps a Datasource

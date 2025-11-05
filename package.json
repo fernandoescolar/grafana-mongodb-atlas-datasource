@@ -1,5 +1,5 @@
 {
-  "name": "valiton-valiton-mongodbatlas-datasource",
+  "name": "fernandoescolar-mongodbatlas-datasource",
   "version": "3.0.1",
   "description": "Display MongoDB Atlas metrics inside of Grafana",
   "scripts": {

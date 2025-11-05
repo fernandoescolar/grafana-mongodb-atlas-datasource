@@ -3,8 +3,8 @@ package plugin
 import (
 	"context"
 
-	"github.com/valiton/grafana-mongodb-atlas-datasource/pkg/dfutil"
-	"github.com/valiton/grafana-mongodb-atlas-datasource/pkg/models"
+	"github.com/fernandoescolar/grafana-mongodb-atlas-datasource/pkg/dfutil"
+	"github.com/fernandoescolar/grafana-mongodb-atlas-datasource/pkg/models"
 	"github.com/grafana/grafana-plugin-sdk-go/backend"
 )
 

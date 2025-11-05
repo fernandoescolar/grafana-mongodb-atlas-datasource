@@ -1,9 +1,9 @@
 package models
 
 const (
-	QueryDiskMeasurements = "disk_measurements"
+	QueryDiskMeasurements     = "disk_measurements"
 	QueryDatabaseMeasurements = "database_measurements"
-	QueryProcessMeasurements = "process_measurements"
+	QueryProcessMeasurements  = "process_measurements"
 )
 
 type QueryOption struct {
@@ -58,30 +58,30 @@ type DatabaseMeasurementsQuery struct {
 }
 
 type GetProcessMeasurementsQuery struct {
-	Project string
-	Mongo string
+	Project     string
+	Mongo       string
 	Measurement string
-	IntervalMs int64
-	Start string
-	End string
+	IntervalMs  int64
+	Start       string
+	End         string
 }
 
 type GetDiskMeasurementsQuery struct {
-	Project string
-	Mongo string
-	Disk string
+	Project     string
+	Mongo       string
+	Disk        string
 	Measurement string
-	IntervalMs int64
-	Start string
-	End string
+	IntervalMs  int64
+	Start       string
+	End         string
 }
 
 type GetDatabaseMeasurementsQuery struct {
-	Project string
-	Mongo string
-	Database string
+	Project     string
+	Mongo       string
+	Database    string
 	Measurement string
-	IntervalMs int64
-	Start string
-	End string
+	IntervalMs  int64
+	Start       string
+	End         string
 }

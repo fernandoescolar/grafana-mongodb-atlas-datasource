@@ -2,15 +2,16 @@ package datasource
 
 import (
 	"context"
+
+	"github.com/fernandoescolar/grafana-mongodb-atlas-datasource/pkg/models"
 	"github.com/grafana/grafana-plugin-sdk-go/backend/log"
-	"github.com/valiton/grafana-mongodb-atlas-datasource/pkg/models"
 
 	simplejson "github.com/bitly/go-simplejson"
 )
 
 type Project struct {
-	ID       string `json:"id"`
-	Name        string `json:"name"`
+	ID   string `json:"id"`
+	Name string `json:"name"`
 }
 
 type Projects []Project

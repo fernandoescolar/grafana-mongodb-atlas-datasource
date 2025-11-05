@@ -8,10 +8,10 @@ import (
 
 // Handlers stores the list of http.HandlerFunc functions for the different resource calls
 type Handlers struct {
-	Projects     http.HandlerFunc
-	Clusters http.HandlerFunc
-	Mongos http.HandlerFunc
-	Disks http.HandlerFunc
+	Projects  http.HandlerFunc
+	Clusters  http.HandlerFunc
+	Mongos    http.HandlerFunc
+	Disks     http.HandlerFunc
 	Databases http.HandlerFunc
 }
 

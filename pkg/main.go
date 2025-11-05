@@ -3,16 +3,15 @@ package main
 import (
 	"os"
 
-	"github.com/valiton/grafana-mongodb-atlas-datasource/pkg/plugin"
-	"github.com/grafana/grafana-plugin-sdk-go/backend"
+	"github.com/fernandoescolar/grafana-mongodb-atlas-datasource/pkg/plugin"
 	"github.com/grafana/grafana-plugin-sdk-go/backend/datasource"
+	"github.com/grafana/grafana-plugin-sdk-go/backend/log"
 )
 
 func main() {
-	err := datasource.Serve(plugin.GetDatasourceOpts())
-
+	err := datasource.Manage("fernandoescolar-grafana-mongodb-atlas-datasource", plugin.NewApp, datasource.ManageOpts{})
 	if err != nil {
-		backend.Logger.Error(err.Error())
+		log.DefaultLogger.Error(err.Error())
 		os.Exit(1)
 	}
 }

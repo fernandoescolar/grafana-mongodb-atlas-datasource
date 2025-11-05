@@ -2,14 +2,15 @@ package datasource
 
 import (
 	"context"
-	"github.com/valiton/grafana-mongodb-atlas-datasource/pkg/models"
+
+	"github.com/fernandoescolar/grafana-mongodb-atlas-datasource/pkg/models"
 
 	simplejson "github.com/bitly/go-simplejson"
 )
 
 type Cluster struct {
-	ID       string `json:"id"`
-	Name        string `json:"name"`
+	ID   string `json:"id"`
+	Name string `json:"name"`
 }
 
 type Clusters []Cluster

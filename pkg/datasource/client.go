@@ -1,14 +1,15 @@
 package datasource
 
 import (
-	"net/http"
 	"context"
 	"fmt"
-	"time"
 	"io/ioutil"
+	"net/http"
+	"time"
+
 	dac "github.com/xinsnake/go-http-digest-auth-client"
 
-	"github.com/valiton/grafana-mongodb-atlas-datasource/pkg/models"
+	"github.com/fernandoescolar/grafana-mongodb-atlas-datasource/pkg/models"
 
 	"github.com/grafana/grafana-plugin-sdk-go/backend/log"
 )
@@ -22,7 +23,7 @@ func (c *MongoDBAtlasClient) query(ctx context.Context, path string, query map[s
 	if apiType != "atlas" && apiType != "public" {
 		apiType = "atlas"
 	}
-	
+
 	var method = "GET"
 	var baseURL = "https://cloud.mongodb.com/api/" + apiType + "/v1.0"
 	var uri = baseURL + path

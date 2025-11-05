@@ -1,4 +1,4 @@
-module github.com/valiton/grafana-mongodb-atlas-datasource
+module github.com/fernandoescolar/grafana-mongodb-atlas-datasource
 
 go 1.25.3
 

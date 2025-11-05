@@ -4,8 +4,8 @@ import (
 	"context"
 	"net/http"
 
-	"github.com/valiton/grafana-mongodb-atlas-datasource/pkg/httputil"
-	"github.com/valiton/grafana-mongodb-atlas-datasource/pkg/models"
+	"github.com/fernandoescolar/grafana-mongodb-atlas-datasource/pkg/httputil"
+	"github.com/fernandoescolar/grafana-mongodb-atlas-datasource/pkg/models"
 )
 
 func handleGetProjects(ctx context.Context, client *MongoDBAtlasClient, r *http.Request) (Projects, error) {
@@ -81,7 +81,7 @@ func handleGetDisks(ctx context.Context, client *MongoDBAtlasClient, r *http.Req
 	q := r.URL.Query()
 	opts := models.ListDisksOptions{
 		Project: q.Get("project"),
-		Mongo: q.Get("mongo"),
+		Mongo:   q.Get("mongo"),
 	}
 
 	disks, err := GetDisks(ctx, client, opts)
@@ -106,7 +106,7 @@ func handleGetDatabases(ctx context.Context, client *MongoDBAtlasClient, r *http
 	q := r.URL.Query()
 	opts := models.ListDatabasesOptions{
 		Project: q.Get("project"),
-		Mongo: q.Get("mongo"),
+		Mongo:   q.Get("mongo"),
 	}
 
 	databases, err := GetDatabases(ctx, client, opts)
