@@ -74,18 +74,18 @@ jobs:
           version: latest
           args: buildAll
 
-      - name: Package plugin
-        id: package-plugin
-        run: |
-          mv dist fernandoescolar-mongodbatlas-datasource
-          zip -r fernandoescolar-mongodbatlas-datasource.zip fernandoescolar-mongodbatlas-datasource
-          md5sum fernandoescolar-mongodbatlas-datasource.zip > fernandoescolar-mongodbatlas-datasource.zip.md5
-          echo "::set-output name=checksum::$(cat ./fernandoescolar-mongodbatlas-datasource.zip.md5 | cut -d' ' -f1)"
+      # - name: Package plugin
+      #   id: package-plugin
+      #   run: |
+      #     mv dist fernandoescolar-mongodbatlas-datasource
+      #     zip -r fernandoescolar-mongodbatlas-datasource.zip fernandoescolar-mongodbatlas-datasource
+      #     md5sum fernandoescolar-mongodbatlas-datasource.zip > fernandoescolar-mongodbatlas-datasource.zip.md5
+      #     echo "::set-output name=checksum::$(cat ./fernandoescolar-mongodbatlas-datasource.zip.md5 | cut -d' ' -f1)"
 
-      - name: Upload artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: fernandoescolar-mongodbatlas-datasource
-          path: |
-            fernandoescolar-mongodbatlas-datasource.zip
-            fernandoescolar-mongodbatlas-datasource.zip.md5
+      # - name: Upload artifact
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #     name: fernandoescolar-mongodbatlas-datasource
+      #     path: |
+      #       fernandoescolar-mongodbatlas-datasource.zip
+      #       fernandoescolar-mongodbatlas-datasource.zip.md5

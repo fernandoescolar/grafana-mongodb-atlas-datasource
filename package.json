@@ -1,6 +1,6 @@
 {
   "name": "fernandoescolar-mongodbatlas-datasource",
-  "version": "3.0.1",
+  "version": "0.0.6beta",
   "description": "Display MongoDB Atlas metrics inside of Grafana",
   "scripts": {
     "build": "webpack -c ./.config/webpack/webpack.config.ts --env production",
