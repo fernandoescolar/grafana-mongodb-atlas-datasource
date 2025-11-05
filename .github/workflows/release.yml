@@ -5,20 +5,27 @@ on:
     tags:
       - "v*.*.*" # Run workflow on version tags, e.g. v1.0.0.
 
+
+
 jobs:
   release:
+    permissions:
+      id-token: write
+      contents: write
+      attestations: write
+
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v5
 
       - name: Setup Node.js environment
-        uses: actions/setup-node@v2.1.2
+        uses: actions/setup-node@v6
         with:
           node-version: "24.x"
 
       - name: Setup Go environment
-        uses: actions/setup-go@v2
+        uses: actions/setup-go@v6
         with:
           go-version: "1.25"
 
@@ -27,7 +34,7 @@ jobs:
         run: echo "::set-output name=dir::$(yarn cache dir)"
 
       - name: Cache yarn cache
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         id: cache-yarn-cache
         with:
           path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
@@ -37,7 +44,7 @@ jobs:
 
       - name: Cache node_modules
         id: cache-node-modules
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         with:
           path: node_modules
           key: ${{ runner.os }}-${{ matrix.node-version }}-nodemodules-${{ hashFiles('**/yarn.lock') }}
@@ -63,14 +70,14 @@ jobs:
 
       - name: Test backend
         if: steps.check-for-backend.outputs.has-backend == 'true'
-        uses: magefile/mage-action@v1
+        uses: magefile/mage-action@v3
         with:
           version: latest
           args: coverage
 
       - name: Build backend
         if: steps.check-for-backend.outputs.has-backend == 'true'
-        uses: magefile/mage-action@v1
+        uses: magefile/mage-action@v3
         with:
           version: latest
           args: buildAll
@@ -79,6 +86,11 @@ jobs:
       #   run: yarn sign
       #   env:
       #     GRAFANA_API_KEY: ${{ secrets.GRAFANA_ACCESS_POLICY_TOKEN }} # Requires a Grafana API key from Grafana.com.
+
+      - uses: grafana/plugin-actions/build-plugin@main
+        with:
+         policy_token: ${{ secrets.GRAFANA_ACCESS_POLICY_TOKEN }}
+         attestation: true
 
       - name: Get plugin metadata
         id: metadata
