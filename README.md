@@ -110,6 +110,12 @@ Next, you are asked different other parameters, such as the database name and th
 
 Pull requests for new features, bug fixes, and suggestions are welcome!
 
+# Tests
+
+```bash
+GRAFANA_VERSION=10.4.1 npm run server
+```
+
 # Release
 
 **1. Add Release Notes to Changelog in CHANGELOG.md**
@@ -121,15 +127,22 @@ Pull requests for new features, bug fixes, and suggestions are welcome!
 
 **4. Create Release Zip**
 
+
+```bash
+go install github.com/magefile/mage@latest
+# node v24
+```
+
+
 ```bash
 yarn install
-npm run build
+yarn build
 mage -v
-rm -Rf valiton-mongodbatlas-datasource && \ 
+rm -Rf valiton-mongodbatlas-datasource && \
   cp -R dist valiton-mongodbatlas-datasource
 ```
 
-Next, please remove all dev-related topics from the `valiton-mongodbatlas-datasource/README.md` file. Otherwise, we can not publish it as Grafana plugin (only keep introduction & usage section). 
+Next, please remove all dev-related topics from the `valiton-mongodbatlas-datasource/README.md` file. Otherwise, we can not publish it as Grafana plugin (only keep introduction & usage section).
 
 Next, bundle it as
 
@@ -151,4 +164,4 @@ see https://help.github.com/en/articles/creating-releases for more information
 
 # Thanks to
 
-We also want to thank the Grafana team for their [Github Datasource](https://github.com/grafana/github-datasource) that helped us to get started and we also used some of their code parts. This decreased our development effort a lot, which made it easier for us to switch to the new Grafana Plugin v2 version! :-) 
+We also want to thank the Grafana team for their [Github Datasource](https://github.com/grafana/github-datasource) that helped us to get started and we also used some of their code parts. This decreased our development effort a lot, which made it easier for us to switch to the new Grafana Plugin v2 version! :-)

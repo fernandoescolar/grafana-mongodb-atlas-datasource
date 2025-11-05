@@ -1,7 +1,6 @@
 import { defaults } from 'lodash';
 
 import React, { PureComponent } from 'react';
-import {} from '@emotion/core'; // required for fix issue https://github.com/grafana/grafana/issues/26512
 import { SelectableValue, QueryEditorProps } from '@grafana/data';
 import { SegmentAsync, Segment, Input, Icon, Tooltip } from '@grafana/ui';
 import { DataSource } from './datasource';
@@ -190,6 +189,7 @@ export class QueryEditor extends PureComponent<Props> {
           <div className="gf-form">
             <span className="gf-form-label width-8 query-keyword">Alias</span>
             <Input
+              css={""}
               name="refId"
               value={alias}
               onChange={this.onAliasChange}

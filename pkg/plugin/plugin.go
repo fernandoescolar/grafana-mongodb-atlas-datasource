@@ -4,11 +4,11 @@ import (
 	"context"
 	"net/http"
 
-	dserrors "github.com/valiton/grafana-mongodb-atlas-datasource/pkg/errors"
 	"github.com/grafana/grafana-plugin-sdk-go/backend"
 	"github.com/grafana/grafana-plugin-sdk-go/backend/datasource"
 	"github.com/grafana/grafana-plugin-sdk-go/backend/instancemgmt"
 	"github.com/grafana/grafana-plugin-sdk-go/backend/resource/httpadapter"
+	dserrors "github.com/valiton/grafana-mongodb-atlas-datasource/pkg/errors"
 )
 
 // Handler is the plugin entrypoint and implements all of the necessary handler functions for dataqueries, healthchecks, and resources.
@@ -24,7 +24,7 @@ type Handler struct {
 // The QueryDataResponse contains a map of RefID to the response for each query, and each response
 // contains Frames ([]*Frame).
 func (cr *Handler) QueryData(ctx context.Context, req *backend.QueryDataRequest) (*backend.QueryDataResponse, error) {
-	h, err := cr.im.Get(req.PluginContext)
+	h, err := cr.im.Get(ctx, req.PluginContext)
 	if err != nil {
 		return nil, err
 	}
@@ -40,7 +40,7 @@ func (cr *Handler) QueryData(ctx context.Context, req *backend.QueryDataRequest)
 // datasource configuration page which allows users to verify that
 // a datasource is working as expected.
 func (cr *Handler) CheckHealth(ctx context.Context, req *backend.CheckHealthRequest) (*backend.CheckHealthResult, error) {
-	h, err := cr.im.Get(req.PluginContext)
+	h, err := cr.im.Get(ctx, req.PluginContext)
 	if err != nil {
 		return nil, err
 	}
@@ -60,7 +60,7 @@ func (cr *Handler) CheckHealth(ctx context.Context, req *backend.CheckHealthRequ
 func (cr *Handler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	pluginCtx := httpadapter.PluginConfigFromContext(r.Context())
 
-	h, err := cr.im.Get(pluginCtx)
+	h, err := cr.im.Get(r.Context(), pluginCtx)
 	if err != nil {
 		panic(err)
 	}

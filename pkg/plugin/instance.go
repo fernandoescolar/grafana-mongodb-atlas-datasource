@@ -3,11 +3,11 @@ package plugin
 import (
 	"context"
 
-	"github.com/valiton/grafana-mongodb-atlas-datasource/pkg/dfutil"
-	"github.com/valiton/grafana-mongodb-atlas-datasource/pkg/datasource"
-	"github.com/valiton/grafana-mongodb-atlas-datasource/pkg/models"
 	"github.com/grafana/grafana-plugin-sdk-go/backend"
 	"github.com/grafana/grafana-plugin-sdk-go/backend/instancemgmt"
+	"github.com/valiton/grafana-mongodb-atlas-datasource/pkg/datasource"
+	"github.com/valiton/grafana-mongodb-atlas-datasource/pkg/dfutil"
+	"github.com/valiton/grafana-mongodb-atlas-datasource/pkg/models"
 )
 
 // Instance is the root Datasource implementation that wraps a Datasource
@@ -43,20 +43,20 @@ func NewMongoDbAtlasInstance(ctx context.Context, settings *models.Settings) *In
 	return &Instance{
 		Datasource: d,
 		Handlers: Handlers{
-			Projects:     ds.HandleGetProjects,
-			Clusters: ds.HandleGetClusters,
+			Projects:  ds.HandleGetProjects,
+			Clusters:  ds.HandleGetClusters,
 			Databases: ds.HandleGetDatabases,
-			Mongos: ds.HandleGetMongos,
-			Disks: ds.HandleGetDisks,
+			Mongos:    ds.HandleGetMongos,
+			Disks:     ds.HandleGetDisks,
 		},
 	}
 }
 
-func newDataSourceInstance(settings backend.DataSourceInstanceSettings) (instancemgmt.Instance, error) {
+func newDataSourceInstance(ctx context.Context, settings backend.DataSourceInstanceSettings) (instancemgmt.Instance, error) {
 	datasourceSettings, err := models.LoadSettings(settings)
 	if err != nil {
 		return nil, err
 	}
 
-	return NewMongoDbAtlasInstance(context.Background(), datasourceSettings), nil
+	return NewMongoDbAtlasInstance(ctx, datasourceSettings), nil
 }
