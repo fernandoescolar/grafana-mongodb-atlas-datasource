@@ -30,6 +30,10 @@
       {
         "name": "Metrics Docs",
         "url": "https://docs.atlas.mongodb.com/api/"
+      },
+      {
+        "name": "Sponsor",
+        "url": "https://github.com/sponsors/fernandoescolar"
       }
     ],
     "screenshots": [
