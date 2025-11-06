@@ -26,6 +26,8 @@ LABEL maintainer="Grafana Labs <hello@grafana.com>"
 ENV GF_PATHS_HOME="/usr/share/grafana"
 WORKDIR $GF_PATHS_HOME
 
+## Switch to root only for build / tooling install steps; we'll drop back to the
+## default non-root 'grafana' user for runtime to avoid running Grafana as root.
 USER root
 
 # Installing supervisor and inotify-tools
@@ -74,4 +76,8 @@ RUN sed -i 's|</body>|<script src="http://localhost:35729/livereload.js"></scrip
 
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
+
+## Drop privileges for runtime
+USER grafana
+
 ENTRYPOINT ["/entrypoint.sh"]
